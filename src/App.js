@@ -1,24 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import Dashboard from "./comoponents/Dashboard";
+import DetailPage from "./comoponents/DetailPage";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MetricDetail from "./comoponents/MetricDetail";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+
+        <Router>
+
+            <Routes>
+                {/* ... другие маршруты */}
+                <Route path="/" element={<Dashboard />} />
+                <Route path='/test' element={<DetailPage />} />
+                <Route
+                    path="/metric-detail/:metricName"
+                    element={<MetricDetail metricName />}
+                    loader={({ params }) => {
+                        console.log(params.metricName); // "hotspur"
+                        alert(params.metricName)
+                    }}
+                />
+            </Routes>
+
+
+        </Router>
+
   );
 }
 
